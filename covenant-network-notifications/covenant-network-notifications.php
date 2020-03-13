@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/WebDevStudios/custom-post-type-ui/
  * Description: Create and display site-wide notifications from the General Settings page
  * Author: John Galyon
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author URI: https://www.covenanthealth.com/
  * Text Domain: covenant-network-notifications
  * Domain Path: /languages
@@ -21,8 +21,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class CovNetworkNotifications
  *
  * Includes common methods accessed throughout this plugin
+ * Why am I doing this? I don't even know how to use a class.
  */
-class Cov_Network_Notifications {
+/*class Cov_Network_Notifications {
 
 	// Return the path of the plugin directory
 	public static function cov_plugin_path() {
@@ -33,7 +34,7 @@ class Cov_Network_Notifications {
 	public static function cov_base_url() {
 		return plugins_url( '', __FILE__ );
 	}
-}
+}*/
 
 add_action( 'wp_enqueue_scripts', 'cov_network_notifications_enqueue');
 function cov_network_notifications_enqueue() {
@@ -92,11 +93,9 @@ function cov_print_notification_editor() {
 
 add_action( 'wp_body_open', 'cov_output_notification' );
 function cov_output_notification() {
-	$msg = get_option('notification_message');
+	$msg    = ! empty( get_option( 'notification_message' ) ) ? get_option( 'notification_message' ) : '<p style="text-align: center;"><i class="fa fa-info-circle" aria-hidden="true"></i><a href="https://www.covenanthealth.com/coronavirus/"> Novel Coronavirus (COVID-19) Information and Updates</a></p>';
 	$struct = '';
 	$struct .= '<div class="notification-wrapper"><div class="container"><div class="row"><div class="col-xs-12">' . $msg . '</div></div></div></div>';
 
-	if( ! empty(get_option('notification_message'))) {
-		echo $struct;
-	}
+	echo $struct;
 }
