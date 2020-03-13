@@ -96,5 +96,7 @@ function cov_output_notification() {
 	$struct = '';
 	$struct .= '<div class="notification-wrapper"><div class="container"><div class="row"><div class="col-xs-12">' . $msg . '</div></div></div></div>';
 
-	echo $struct;
+	if( ! empty(get_option('notification_message'))) {
+		echo $struct;
+	}
 }
