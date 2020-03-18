@@ -1,5 +1,5 @@
-.notification-wrapper{background:#00549f;border-bottom:1px solid #00396c;display:block;padding:20px 0;width:100%}
-.notification-wrapper p{color:#fff;font-size:20px}
-.notification-wrapper p:only-of-type,.notification-wrapper p:last-of-type{margin-bottom:0}
-.notification-wrapper p a{border-bottom:1px solid rgba(255,255,255,0.4);color:#fff !important}
-.notification-wrapper p a:active,.notification-wrapper p a:focus,.notification-wrapper p a:hover{border-bottom:3px solid white;text-decoration:none;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out}
+.system-notification-wrapper{background:#00549f;border-bottom:1px solid #00396c;display:block;padding:20px 0;width:100%}
+.system-notification-wrapper p{color:#fff;font-size:20px}
+.system-notification-wrapper p:only-of-type,.system-notification-wrapper p:last-of-type{margin-bottom:0}
+.system-notification-wrapper p a{border-bottom:1px solid rgba(255,255,255,0.4);color:#fff !important}
+.system-notification-wrapper p a:active,.system-notification-wrapper p a:focus,.system-notification-wrapper p a:hover{border-bottom:3px solid white;text-decoration:none;-webkit-transition:all 300ms ease-in-out;transition:all 300ms ease-in-out}
