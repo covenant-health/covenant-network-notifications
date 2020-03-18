@@ -1,6 +1,5 @@
 ( function( $ ) {
 	$( document ).ready( function() {
-
 		$( '.system-notification-wrapper ul' ).each( function( i, el ) {
 			$( el )
 
@@ -22,7 +21,10 @@
 				.attr( 'aria-labelledby', 'systemNotificationDropdown' )
 
 				// Find each list item and add a border to it
-				.find( 'li' ).css( 'border-bottom', '1px solid #eeeeee' );
+				.find( 'li' ).css( 'border-bottom', '1px solid #eeeeee' )
+
+				// Find each href and add a campaign querystring to it
+				.find( 'a' ).attr( 'href', $( this ).attr( 'href' ) + '/?utm_source=notification_bar&utm_medium=banner&utm_campaign=coronavirus' );
 
 			// Insert the button that makes it work
 			$( '<button id="systemNotificationDropdown" class="btn btn-default btn-block dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select your facility <i class="fa fa-caret-down" aria-hidden="true"></i></button>' ).insertBefore( $( el ) );

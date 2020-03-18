@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/WebDevStudios/custom-post-type-ui/
  * Description: Create and display site-wide notifications from the General Settings page
  * Author: John Galyon
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author URI: https://www.covenanthealth.com/
  * Text Domain: covenant-network-notifications
  * Domain Path: /languages
@@ -61,6 +61,22 @@ function cov_network_notifications_enqueue() {
 add_action('admin_init', 'cov_notification_settings');
 
 function cov_notification_settings() {
+	/*register_setting(
+		'general',
+		'approval_check',
+	);*/
+
+	/*add_settings_field(
+		'approval_mode',
+		'Set the notification field to be visible to administrators only for testing and approval purposes',
+		'cov_print_approval_check',
+		'general',
+		'notification_msg',
+		array(
+			'Activate this setting to limit notification visibility to site administrators'
+		)
+	);*/
+
 	register_setting(
 		'general',
 		'notification_message',
@@ -85,8 +101,15 @@ function cov_notification_settings() {
 		'general',
 		'notification-msg'
 	);
+}
 
-	// TODO: Add check to make this visible only to administrators/editors for approval purposes
+function cov_print_approval_check() {
+	$html = '<input type="checkbox" id="approval_mode" name="approval_mode" value="1" ' . checked(1, get_option('approval_mode'), false) . '/>';
+
+	// Here, we will take the first argument of the array and add it to a label next to the checkbox
+	$html .= '<label for="approval_mode"> '  . $args[0] . '</label>';
+
+	echo $html;
 }
 
 function cov_print_notification_editor() {
@@ -106,6 +129,12 @@ function cov_output_notification() {
 	$msg    = ! empty( get_option( 'notification_message' ) ) ? get_option( 'notification_message' ) : '<p style="text-align: center;"><i class="fa fa-info-circle" aria-hidden="true"></i><a href="https://www.covenanthealth.com/coronavirus/?utm_source=notification_bar&utm_medium=banner&utm_campaign=coronavirus"> Novel Coronavirus (COVID-19) Information and Updates</a></p>';
 	$struct = '';
 	$struct .= '<div class="system-notification-wrapper"><div class="container"><div class="row"><div class="col-xs-12">' . $msg . '</div></div></div></div>';
+
+	/*if( ! empty( get_option( 'approval_mode' ) ) && current_user_can( 'administrator' )) {
+		echo $struct;
+	} else {
+		echo $struct;
+	}*/
 
 	echo $struct;
 }
