@@ -11,9 +11,13 @@ $brand-danger:  #d9534f !default;
 	padding:       20px 0;
 	width:         100%;
 
+	h1, h2, h3, h4, h5, h6, p {
+		color:      #fff;
+		margin-top: 0;
+	}
+
 	p {
-		color:         #fff;
-		font-size:     20px;
+		font-size: 20px;
 
 		&:only-of-type,
 		&:last-of-type {
@@ -31,6 +35,39 @@ $brand-danger:  #d9534f !default;
 				text-decoration: none;
 				transition:      all 300ms ease-in-out;
 			}
+		}
+	}
+}
+
+#systemNotificationDropdown {
+	&:active,
+	&:focus,
+	&:hover {
+		background: lighten($brand-primary, 60%);
+	}
+}
+
+.system-notification-wrapper {
+	.notification-menu {
+		top:   38px;
+		width: auto;
+
+		> li {
+			> a {
+				white-space: normal;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.system-notification-wrapper {
+		.notification-menu {
+			left:       50%;
+			list-style: none;
+			margin:     auto;
+			padding:    0;
+			transform:  translateX(-50%);
 		}
 	}
 }
