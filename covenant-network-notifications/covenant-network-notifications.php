@@ -36,6 +36,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 }*/
 
+add_action( 'wp_body_open', 'add_medchat' );
+function add_medchat() {
+	echo '<style>#medchat-trigger .outreach-disabled {font-size: 0 !important;width: 240px !important;}#medchat-trigger .outreach-disabled:after {font-size: 16px;content: "Coronavirus Assessment Tool"}.mc-expand {background-color: #00549f !important}</style><script type="text/javascript" async src="https://medchatapp.com/widget/widget.js?api-key=z_a91c_250qOb5muOZLhnA"></script>';
+}
+
 add_action( 'wp_enqueue_scripts', 'cov_network_notifications_enqueue' );
 function cov_network_notifications_enqueue() {
 	$css_path = plugin_dir_url( __FILE__ ) . 'assets/covenant-network-notifications.min.css';
@@ -249,17 +254,17 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 				if ( is_front_page() && $blog_name === get_bloginfo( 'name' ) ) {
 
 					?>
-                    <script type="text/javascript">
-                        (function ($) {
-                            let cContent = '<?php echo $fields['content']; ?>';
-                            console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
-                            console.log('all sites');
-                            console.log(cContent);
-                            $(document).ready(function () {
-                                $('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
-                            });
-                        })(jQuery);
-                    </script>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields['content']; ?>';
+							console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('all sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
 					<?php
 
 				}
@@ -275,17 +280,17 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 				if ( is_front_page() && $blog_name === get_bloginfo( 'name' ) ) {
 
 					?>
-                    <script type="text/javascript">
-                        (function ($) {
-                            let cContent = '<?php echo $fields['content']; ?>';
-                            console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
-                            console.log('cov sites');
-                            console.log(cContent);
-                            $(document).ready(function () {
-                                $('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
-                            });
-                        })(jQuery);
-                    </script>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields['content']; ?>';
+							console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('cov sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
 					<?php
 
 				}
@@ -301,17 +306,17 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 				if ( is_front_page() && $blog_name === get_bloginfo( 'name' ) ) {
 
 					?>
-                    <script type="text/javascript">
-                        (function ($) {
-                            let cContent = '<?php echo $fields['content']; ?>';
-                            console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
-                            console.log('cmg sites');
-                            console.log(cContent);
-                            $(document).ready(function () {
-                                $('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
-                            });
-                        })(jQuery);
-                    </script>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields['content']; ?>';
+							console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('cmg sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
 					<?php
 
 				}
@@ -331,17 +336,17 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 				<?php
 				if ( $blog_name === get_bloginfo( 'name' ) && is_front_page() ) {
 					?>
-                    <script type="text/javascript">
-                        (function ($) {
-                            let cContent = '<?php echo $fields['content']; ?>';
-                            console.log('<?php echo $site[0]->blog_id; ?> = <?php echo $site[0]->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
-                            console.log('selected sites');
-                            console.log(cContent);
-                            $(document).ready(function () {
-                                $('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
-                            });
-                        })(jQuery);
-                    </script>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields['content']; ?>';
+							console.log('<?php echo $site[0]->blog_id; ?> = <?php echo $site[0]->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('selected sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
 					<?php
 
 				}
