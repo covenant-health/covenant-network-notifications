@@ -38,7 +38,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_body_open', 'add_medchat' );
 function add_medchat() {
-	echo '<style>#medchat-trigger .outreach-disabled {font-size: 0 !important;width: 240px !important;}#medchat-trigger .outreach-disabled:after {font-size: 16px;content: "Coronavirus Assessment Tool"}.mc-expand {background-color: #00549f !important}</style><script type="text/javascript" async src="https://medchatapp.com/widget/widget.js?api-key=z_a91c_250qOb5muOZLhnA"></script>';
+	echo '<style>.medchat-widget button.mc-expand {padding: 6px 6px 10px;#medchat-trigger .outreach-disabled {font-size: 0 !important;width: 240px !important;}#medchat-trigger .outreach-disabled:after {font-size: 16px;content: "Coronavirus Assessment Tool"}.mc-expand {background-color: #00549f !important}</style><script type="text/javascript" src="https://medchatapp.com/widget/widget.js?api-key=z_a91c_250qOb5muOZLhnA"></script><script>jQuery(document).ready(function (){if (window.location.href.indexOf("?q=chatinit") > -1) {console.log("Chat initiated from browser ...");window.MedChatApp.launch();}});</script>';
 }
 
 add_action( 'wp_enqueue_scripts', 'cov_network_notifications_enqueue' );
