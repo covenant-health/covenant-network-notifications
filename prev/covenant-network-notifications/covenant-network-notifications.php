@@ -378,19 +378,31 @@ function blogLoopTest( $content ) {
 		$cmg = array();
 		$non_cmg = array();
 
+		$content .= '<h2>All Sites</h2>';
+		$content .= '<ul style="list-style: none; margin: 0 0 13px 0; padding: 0;">';
 		foreach ( $sites as $site ) {
 			switch_to_blog( $site->blog_id );
 			$opt = get_option( 'cov_cmg_check' );
 
-			if( $opt === 1) {
-				array_push( $cmg, $site->blog_id );
-			} else {
-				array_push( $non_cmg, $site->blog_id );
-			}
+			$content .= '<li>' . $site->blog_id . ' : ' . $site->blogname . '</li>';
+
 			restore_current_blog();
 		}
+		$content .= '</ul>';
 
-		$content .= print_r($cmg) . '<br><br>' . print_r($non_cmg);
+		$content .= '<h2>CMG Sites</h2>';
+		$content .= '<ul style="list-style: none; margin: 0 0 13px 0; padding: 0;">';
+		foreach ( $sites as $site ) {
+			switch_to_blog( $site->blog_id );
+			$opt = get_blog_option( $site->blog_id, 'cov_cmg_check' );
+
+			if( isset( $opt ) ) {
+				$content .= '<li>' . $site->blog_id . ' : ' . $site->blogname . '</li>';
+			}
+
+			restore_current_blog();
+		}
+		$content .= '</ul>';
 	}
 
 	return $content;
@@ -437,26 +449,4 @@ function cov_cmg_check_callback() {
 	$html .= '</fieldset>';
 
 	echo $html;
-}
-
-add_filter( 'act/load_field/key=field_5eb4ae4943aa4', 'cmg_sites_check_2_load_field' );
-function cmg_sites_check_2_load_field( $field ) {
-	$sites = get_sites(
-	array(
-	'archived' => 0,
-	'deleted'  => 0,
-	'public'   => 1
-	)
-	);
-
-	$field['choices'] = array();
-	foreach ( $sites as $site ) {
-		switch_to_blog( $site->blog_id );
-		$opt = get_option( 'cov_cmg_check' );
-		if ( $opt === 1 ) {
-			$field['choices'][ $site->blog_id ] = $site->blogname;
-		}
-		restore_current_blog();
-	}
-	return $field;
 }
