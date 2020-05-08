@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/WebDevStudios/custom-post-type-ui/
  * Description: Create and display site-wide notifications from the General Settings page
  * Author: John Galyon
- * Version: 1.1
+ * Version: 1.4
  * Author URI: https://www.covenanthealth.com/
  * Text Domain: covenant-network-notifications
  * Domain Path: /languages
@@ -46,19 +46,19 @@ function cov_network_notifications_enqueue() {
 	$css_path = plugin_dir_url( __FILE__ ) . 'assets/covenant-network-notifications.min.css';
 
 	wp_enqueue_style(
-		'covenant_network_notifications',
-		plugin_dir_url( __FILE__ ) . 'assets/covenant-network-notifications.min.css',
-		'main',
-		'1.0.3',
-		'screen'
+			'covenant_network_notifications',
+			plugin_dir_url( __FILE__ ) . 'assets/covenant-network-notifications.min.css',
+			'main',
+			'1.4',
+			'screen'
 	);
 
 	wp_enqueue_script(
-		'covenant_network_notifications',
-		plugin_dir_url( __FILE__ ) . 'assets/covenant-network-notifications.min.js',
-		'jquery',
-		'1.0.3',
-		true
+			'covenant_network_notifications',
+			plugin_dir_url( __FILE__ ) . 'assets/covenant-network-notifications.min.js',
+			'jquery',
+			'1.4',
+			true
 	);
 }
 
@@ -68,28 +68,28 @@ add_action( 'admin_init', 'cov_notification_settings' );
 function cov_notification_settings() {
 
 	register_setting(
-		'general',
-		'notification_message',
-		array(
-			'type'              => 'string',
-			'sanitize_callback' => 'wp_kses_post',
-			'show_in_rest'      => true
-		)
+			'general',
+			'notification_message',
+			array(
+					'type'              => 'string',
+					'sanitize_callback' => 'wp_kses_post',
+					'show_in_rest'      => true
+			)
 	);
 
 	add_settings_section(
-		'notification-msg',
-		'Site-Wide Notification',
-		'__return_false',
-		'general'
+			'notification-msg',
+			'Site-Wide Notification',
+			'__return_false',
+			'general'
 	);
 
 	add_settings_field(
-		'notification_message',
-		'Enter notification text to be shown site-wide',
-		'cov_print_notification_editor',
-		'general',
-		'notification-msg'
+			'notification_message',
+			'Enter notification text to be shown site-wide',
+			'cov_print_notification_editor',
+			'general',
+			'notification-msg'
 	);
 }
 
@@ -97,17 +97,17 @@ function cov_print_notification_editor() {
 	$the_guides = html_entity_decode( get_option( 'notification_message' ) );
 
 	echo wp_editor(
-		get_option( 'notification_message' ),
-		'notificationmessage',
-		array(
-			'textarea_name' => 'notification_message'
-		)
+			get_option( 'notification_message' ),
+			'notificationmessage',
+			array(
+					'textarea_name' => 'notification_message'
+			)
 	);
 }
 
 add_action( 'wp_body_open', 'cov_output_notification' );
 function cov_output_notification() {
-	$msg    = ! empty( get_option( 'notification_message' ) ) ? get_option( 'notification_message' ) : '<p style="text-align: center;"><i class="fa fa-info-circle" aria-hidden="true"></i><a href="https://www.covenanthealth.com/coronavirus/?utm_source=notification_bar&utm_medium=banner&utm_campaign=coronavirus"> Novel Coronavirus (COVID-19) Information and Updates</a></p>';
+	$msg    = ! empty( get_option( 'notification_message' ) ) ? get_option( 'notification_message' ) : '<p style="text-align: center;"><i class="fa fa-info-circle" aria-hidden="true"></i><a href="https://www.covenanthealth.com/coronavirus/?utm_source=notification_bar&utm_medium=banner&utm_campaign=coronavirus"> Novel Coronavirus (COVID-19) Information and Updates</a></p>';
 	$struct = '';
 	$struct .= '<div class="system-notification-wrapper"><div class="container"><div class="row"><div class="col-xs-12">' . $msg . '</div></div></div></div>';
 
@@ -133,101 +133,101 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 		$site      = 1;
 		$chosen    = array();
 		$all_sites = get_sites( array(
-			'archived' => 0,
-			'deleted'  => 0,
-			'public'   => 1
+				'archived' => 0,
+				'deleted'  => 0,
+				'public'   => 1
 		) );
 		$cov_sites = get_sites( array(
-			'site__in' => array(
-				1,
-				2,
-				3,
-				4,
-				6,
-				8,
-				9,
-				10,
-				12,
-				13,
-				14,
-				17,
-				18,
-				19,
-				22,
-				32,
-				34,
-				43,
-				51,
-				56,
-				57,
-				62,
-				76,
-				91,
-				93
-			)
+				'site__in' => array(
+						1,
+						2,
+						3,
+						4,
+						6,
+						8,
+						9,
+						10,
+						12,
+						13,
+						14,
+						17,
+						18,
+						19,
+						22,
+						32,
+						34,
+						43,
+						51,
+						56,
+						57,
+						62,
+						76,
+						91,
+						93
+				)
 		) );
 		$cmg_sites = get_sites( array(
-			'site__in' => array(
-				9,
-				11,
-				15,
-				16,
-				20,
-				21,
-				23,
-				24,
-				25,
-				26,
-				27,
-				29,
-				30,
-				31,
-				33,
-				36,
-				37,
-				39,
-				40,
-				42,
-				44,
-				46,
-				47,
-				48,
-				49,
-				51,
-				52,
-				53,
-				54,
-				58,
-				59,
-				61,
-				63,
-				65,
-				66,
-				67,
-				68,
-				69,
-				70,
-				72,
-				73,
-				74,
-				77,
-				78,
-				80,
-				81,
-				82,
-				85,
-				88,
-				94
-			)
+				'site__in' => array(
+						9,
+						11,
+						15,
+						16,
+						20,
+						21,
+						23,
+						24,
+						25,
+						26,
+						27,
+						29,
+						30,
+						31,
+						33,
+						36,
+						37,
+						39,
+						40,
+						42,
+						44,
+						46,
+						47,
+						48,
+						49,
+						51,
+						52,
+						53,
+						54,
+						58,
+						59,
+						61,
+						63,
+						65,
+						66,
+						67,
+						68,
+						69,
+						70,
+						72,
+						73,
+						74,
+						77,
+						78,
+						80,
+						81,
+						82,
+						85,
+						88,
+						94
+				)
 		) );
 
 		// Get the field data from the options page on covenanthealth.com
 		switch_to_blog( $site );
 		$fields = array(
-			'content'   => rtrim( preg_replace( '~>\\s+<~m', '><', get_field( 'cov_network_front_page_content', 'options' ) ) ),
-			'reach'     => get_field( 'content_reach', 'options' ),
-			'cov_blogs' => get_field( 'covenant_sites_check', 'options' ),
-			'cmg_blogs' => get_field( 'cmg_sites_check', 'options' ),
+				'content'   => rtrim( preg_replace( '~>\\s+<~m', '><', get_field( 'cov_network_front_page_content', 'options' ) ) ),
+				'reach'     => get_field( 'content_reach', 'options' ),
+				'cov_blogs' => get_field( 'covenant_sites_check', 'options' ),
+				'cmg_blogs' => get_field( 'cmg_sites_check', 'options' ),
 		);
 
 		$cov_sites_console = get_field( 'covenant_sites_check', 'options' );

@@ -9,9 +9,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/register": "^7.0.0",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0",
     "beepbeep": "^1.2.2",
     "bootstrap-sass": "^3.4.1",
     "browser-sync": "^2.11.1",
@@ -36,7 +36,7 @@
     "gulp-sourcemaps": "^2.6.2",
     "gulp-uglify": "^3.0.0",
     "gulp-uglifycss": "^1.0.6",
-    "gulp-wp-pot": "^2.0.7"
+    "gulp-wp-pot": "^2.4.1"
   },
   "scripts": {
     "start": "gulp",
@@ -47,5 +47,8 @@
     "images": "gulp images",
     "clearCache": "gulp clearCache",
     "translate": "gulp translate"
+  },
+  "dependencies": {
+    "on-change": "^2.0.1"
   }
 }
