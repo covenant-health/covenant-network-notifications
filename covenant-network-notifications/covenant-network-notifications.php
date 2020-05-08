@@ -229,9 +229,17 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 				'cov_blogs' => get_field( 'covenant_sites_check', 'options' ),
 				'cmg_blogs' => get_field( 'cmg_sites_check', 'options' ),
 		);
+		$fields_2 = array(
+				'content'   => rtrim( preg_replace( '~>\\s+<~m', '><', get_field( 'cov_network_front_page_content_2', 'options' ) ) ),
+				'reach'     => get_field( 'content_reach_2', 'options' ),
+				'cov_blogs' => get_field( 'covenant_sites_check_2', 'options' ),
+				'cmg_blogs' => get_field( 'cmg_sites_check_2', 'options' ),
+		);
 
 		$cov_sites_console = get_field( 'covenant_sites_check', 'options' );
 		$cmg_sites_console = get_field( 'cmg_sites_check', 'options' );
+		$cov_sites_console_2 = get_field( 'covenant_sites_check_2', 'options' );
+		$cmg_sites_console_2 = get_field( 'cmg_sites_check_2', 'options' );
 
 		if ( $fields['reach']['value'] === 'other' ) {
 			foreach ( $cov_sites_console as $val ) {
@@ -242,8 +250,19 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 			}
 		}
 
+		if ( $fields_2['reach']['value'] === 'other' ) {
+			foreach ( $cov_sites_console_2 as $val ) {
+				array_push( $chosen, intval( $val ) );
+			}
+			foreach ( $cmg_sites_console_2 as $val ) {
+				array_push( $chosen, intval( $val ) );
+			}
+		}
+
 		restore_current_blog();
 
+		// ----------------------------------------
+		// First set of fields
 		// What sites need this hot data injection?
 		if ( $fields['reach']['value'] === 'all' ) {
 			foreach ( $all_sites as $site ) {
@@ -339,6 +358,119 @@ if ( function_exists( 'get_sites' ) && class_exists( 'WP_Site_Query' ) ) {
 					<script type="text/javascript">
 						(function ($) {
 							let cContent = '<?php echo $fields['content']; ?>';
+							console.log('<?php echo $site[0]->blog_id; ?> = <?php echo $site[0]->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('selected sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
+					<?php
+
+				}
+
+				restore_current_blog();
+			}
+		}
+
+		// ----------------------------------------
+		// Second set of fields
+		// What sites need this hot data injection?
+		if ( $fields_2['reach']['value'] === 'all' ) {
+			foreach ( $all_sites as $site ) {
+				$id        = $site->blog_id;
+				$blog_name = get_bloginfo( 'name' );
+				switch_to_blog( $id ); ?>
+				<?php
+				if ( is_front_page() && $blog_name === get_bloginfo( 'name' ) ) {
+
+					?>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields_2['content']; ?>';
+							console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('all sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
+					<?php
+
+				}
+
+				restore_current_blog();
+			}
+		} else if ( $fields_2['reach']['value'] === 'cov' ) {
+			foreach ( $cov_sites as $site ) {
+				$id        = $site->blog_id;
+				$blog_name = get_bloginfo( 'name' );
+				switch_to_blog( $id ); ?>
+				<?php
+				if ( is_front_page() && $blog_name === get_bloginfo( 'name' ) ) {
+
+					?>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields_2['content']; ?>';
+							console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('cov sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
+					<?php
+
+				}
+
+				restore_current_blog();
+			}
+		} else if ( $fields_2['reach']['value'] === 'cmg' ) {
+			foreach ( $cmg_sites as $site ) {
+				$id        = $site->blog_id;
+				$blog_name = get_bloginfo( 'name' );
+				switch_to_blog( $id ); ?>
+				<?php
+				if ( is_front_page() && $blog_name === get_bloginfo( 'name' ) ) {
+
+					?>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields_2['content']; ?>';
+							console.log('<?php echo $site->blog_id; ?> = <?php echo $site->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
+							console.log('cmg sites');
+							console.log(cContent);
+							$(document).ready(function () {
+								$('main').prepend('<div class="row options_content_row selected_sites"><div class="col-xs-12">' + cContent + '</div></div>');
+							});
+						})(jQuery);
+					</script>
+					<?php
+
+				}
+
+				restore_current_blog();
+			}
+		} else {
+			foreach ( $chosen as $siteVar ) {
+				$site = get_sites( array( 'ID' => $siteVar ) );
+				$id   = $site[0]->blog_id;
+				console_log( $chosen );
+				?>
+				<?php
+				$blog_name = get_bloginfo( 'name' );
+				switch_to_blog( $id );
+				?>
+				<?php
+				if ( $blog_name === get_bloginfo( 'name' ) && is_front_page() ) {
+					?>
+					<script type="text/javascript">
+						(function ($) {
+							let cContent = '<?php echo $fields_2['content']; ?>';
 							console.log('<?php echo $site[0]->blog_id; ?> = <?php echo $site[0]->domain ?> = <?php echo get_current_blog_id(); ?> = <?php echo $id; ?> = <?php echo get_bloginfo( 'name' ); ?> = <?php echo $blog_name; ?>');
 							console.log('selected sites');
 							console.log(cContent);
